@@ -1,7 +1,7 @@
 
 import config from '../config'
 
-import {LIVE_ORDERS, LIVE_TRADES, ORDER_BOOK} from './actionTypes'
+import {LIVE_ORDERS, LIVE_TRADES, ORDER_BOOK,CLEAR} from './actionTypes'
 
 
 
@@ -39,6 +39,7 @@ import {LIVE_ORDERS, LIVE_TRADES, ORDER_BOOK} from './actionTypes'
 
   const orderBook = ()=>   {
    return dispatch => {
+  try {
     let ws  = new WebSocket(config.websocket_url)
     var subscribeMsg = {
       "event": "bts:subscribe",
@@ -59,12 +60,16 @@ import {LIVE_ORDERS, LIVE_TRADES, ORDER_BOOK} from './actionTypes'
     ws.onclose = function() {
       //console.log('Websocket connection closed');
   };
+  } catch (e) {
+    console.log(e)
+  }
 
   }}
    
   const liveOrder = ()=>   {
     return dispatch => {
-     let ws  = new WebSocket(config.websocket_url)
+      try {
+        let ws  = new WebSocket(config.websocket_url)
      var subscribeMsg = {
        "event": "bts:subscribe",
        "data": {
@@ -85,14 +90,26 @@ import {LIVE_ORDERS, LIVE_TRADES, ORDER_BOOK} from './actionTypes'
       //console.log('Websocket connection closed');
   };
  
-   }}
+   
 
+      } catch (e) {
+        console.log(e)
+      }
+     }}
+
+
+     const clearStore=()=> {
+       return(dispatch=>{
+         dispatch({type:CLEAR,payload:null})
+       })
+
+     }
     
 
   
 
 
-export {liveTrades,orderBook,liveOrder}
+export {liveTrades,orderBook,liveOrder,clearStore}
 
 /*
 

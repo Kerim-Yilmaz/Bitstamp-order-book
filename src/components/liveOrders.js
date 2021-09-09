@@ -33,11 +33,10 @@ const LiveOrders = () => {
                         const {amount,price,order_type,timestamp,id} = res
                         return (
                             <>
-                                <tr key ={id}>
+                                <tr key={id}>
                                     <td style={order_type?{color:'red'}:{color:'green'}}>{price}</td>
                                     <td>{amount}</td>
                                     <td>{moment(timestamp).format('hh:mm:ss')}</td>
-                                    
                                 </tr>
                             </>
                         )

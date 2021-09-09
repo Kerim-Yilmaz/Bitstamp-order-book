@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Card, Col, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {liveTrades, orderBook} from '../store/actions'
+import {liveTrades,} from '../store/actions'
 
 const LiveTrades = () => {
     const liveTrade = useSelector(state=> state.webSocketData.live_trades)
@@ -14,13 +14,17 @@ const LiveTrades = () => {
     dispatch(liveTrades());
     
     }, [dispatch])
-    console.log(liveTrade)
 
     return (
         <>
         <Col md={12}>
     
-            <h4> Gerçekleşen İşlemler</h4>
+         <Card>
+            <Card.Header>
+                <Card.Title>
+                    Gerçekleşen İşlemler
+                </Card.Title>
+            </Card.Header>
            <Table striped size='sm' responsive hover >
                 <thead>
                     <tr>
@@ -35,20 +39,22 @@ const LiveTrades = () => {
                        const{price,amount,id,timestamp,type}=res
                         return (
                             <>
+                            {price ? 
                                 <tr key={id}>
                                     <td style={type?{color:'red'}:{color:'green'}}>{type?'Sell(BTC)':'Buy(BTC)'}</td>
                                     <td style={type?{color:'red'}:{color:'green'}}>{price}</td>
                                     <td>{amount}</td>
-                                    <td>{moment(timestamp).format('hh:mm:ss')}</td>
+                                    <td>{moment(parseInt(timestamp)).format('hh:mm:ss')}</td>
                                     
                                 </tr>
+                                :null}
                             </>
                         )
                     }):'Yükleniyor'
                 } 
                 </tbody>
             </Table>
-     
+            </Card>
         </Col>
         </>
     )

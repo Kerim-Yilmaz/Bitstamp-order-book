@@ -7,11 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f9f9f9;
 }
-.table{
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -24,7 +24,8 @@ const websocketReducer = (state =initialState, action) => {
      let asks=action.payload.asks.sort((a,b)=>{return b[0]-a[0]}).slice(88,100)
      let bids=action.payload.bids.sort((a,b)=>{return b[0]-a[0]}).slice(0,12);
       return {...state,order_book:{bids,asks}}
-    }return{...state}
+    }
+    return{...state}
     
     case LIVE_TRADES:
       let tradesData = [];

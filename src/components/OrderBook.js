@@ -7,6 +7,7 @@ import {orderBook} from "../store/actions"
 const OrderBook = () => {
     const orderbookData = useSelector(state => state.webSocketData.order_book)
     const dispatch = useDispatch()
+    
     useEffect(() => {
         dispatch(orderBook())
     }, [dispatch])
